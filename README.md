@@ -30,6 +30,9 @@ foo@bar:~$ client.exe decompress E:\result.ai E:\originalFile.txt
           <tr>
             <th>Исходный размер данных</th>
           </tr>
+            <tr>
+            <th>Данные</th>
+          </tr>
         </table>
         <table>
           <tr>
@@ -45,6 +48,9 @@ foo@bar:~$ client.exe decompress E:\result.ai E:\originalFile.txt
           </tr>
           <tr>
             <th>Исходный размер данных</th>
+          </tr>
+             <tr>
+            <th>Данные</th>
           </tr>
         </table>
       </th>
