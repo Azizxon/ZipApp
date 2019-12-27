@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{0F56B3DA-67B4-4AE7-8DA1-B92C945E1C30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipperLib", "ZipperLib\ZipperLib.csproj", "{206E514A-AEB4-4AC2-AA2B-2BAF80412040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipperLibUnitTest", "ZipperLibUnitTest\ZipperLibUnitTest.csproj", "{2302E114-F912-4741-ACB4-FB141E40248A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F56B3DA-67B4-4AE7-8DA1-B92C945E1C30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F56B3DA-67B4-4AE7-8DA1-B92C945E1C30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F56B3DA-67B4-4AE7-8DA1-B92C945E1C30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F56B3DA-67B4-4AE7-8DA1-B92C945E1C30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{206E514A-AEB4-4AC2-AA2B-2BAF80412040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206E514A-AEB4-4AC2-AA2B-2BAF80412040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206E514A-AEB4-4AC2-AA2B-2BAF80412040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206E514A-AEB4-4AC2-AA2B-2BAF80412040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2302E114-F912-4741-ACB4-FB141E40248A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2302E114-F912-4741-ACB4-FB141E40248A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2302E114-F912-4741-ACB4-FB141E40248A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2302E114-F912-4741-ACB4-FB141E40248A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D3EA9B6-4689-4BDA-B97D-2337CE469B90}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 1
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://azizxon.visualstudio.com/defaultcollection
+		SccProjectUniqueName0 = ZipperLib\\ZipperLib.csproj
+		SccProjectName0 = $/Zipper/ZipperLib
+		SccAuxPath0 = https://azizxon.visualstudio.com/defaultcollection
+		SccLocalPath0 = ZipperLib
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+EndGlobal
