@@ -15,13 +15,12 @@ foo@bar:~$ client.exe decompress E:\result.ai E:\originalFile.txt
 
 
 ## Структура сжатого файла
-<table>
-    <tr>
-      <td></td>
-    </tr>
-    <tr>
-      <th>Размер исходного файла
-        <table width="150">
+
+<table>    
+    <tr>    	
+      <th>
+          <p>Размер исходного файла</p>
+        <table>
           <tr>
             <th>Индекс блока</th>
           </tr>
@@ -32,7 +31,12 @@ foo@bar:~$ client.exe decompress E:\result.ai E:\originalFile.txt
             <th>Исходный размер данных</th>
           </tr>
         </table>
-        <table width="150">
+        <table>
+          <tr>
+          ...
+          </tr>
+        </table>
+        <table>
           <tr>
             <th>Индекс блока</th>
           </tr>
@@ -44,6 +48,5 @@ foo@bar:~$ client.exe decompress E:\result.ai E:\originalFile.txt
           </tr>
         </table>
       </th>
-    </tr>
 </table>
   
