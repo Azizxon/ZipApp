@@ -15,8 +15,7 @@
             return $"Index : {Header.Index}\n" +
                    $"Compressed Data Length: {Header.CompressedDataLength}\n" +
                    $"Decompressed Data Length: {Header.DecompressedDataLength}\n" +
-                   $"Data Length: {Data.Length}\n" +
-                   $"Last two items from data: {Data[0]} {Data[1]}\n";
+                   $"Data Length: {Data.Length}\n";
         }
     }
 }
