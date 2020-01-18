@@ -66,18 +66,18 @@ namespace ZipperLibUnitTest
         }
 
         [TestMethod]
-        public void CompressAndDecompressFilesBetweenFourGBAnd32GB_OriginalFileAndResultFileShouldBeSame()
+        public void CompressAndDecompressFilesBetweenOneGBAnd32GB_OriginalFileAndResultFileShouldBeSame()
         {
             var baseSize = 1024L;
-            // from 4GB to 32 GB
+            // from 1 GB to 32 GB
             var fileSizes = new[]
             {
                 (long) Math.Pow(baseSize, 3),
                 (long) Math.Pow(baseSize, 3)*2,
                 (long) Math.Pow(baseSize, 3)*4,
-                //(long) Math.Pow(baseSize, 3)*8,
-                //(long) Math.Pow(baseSize, 3)*16,
-                //(long) Math.Pow(baseSize, 3)*32,
+                (long) Math.Pow(baseSize, 3)*8,
+                (long) Math.Pow(baseSize, 3)*16,
+                (long) Math.Pow(baseSize, 3)*32,
             };
             foreach (var fileSize in fileSizes)
             {

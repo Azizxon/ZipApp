@@ -104,7 +104,7 @@ namespace ZipperLib.Domain
                 // when size
                 // less than 1024 bytes
                 case long size when size < baseSize:
-                    BufferSize = 1; // 1 B
+                    BufferSize = 32; // 1 B
                     break;
                 // between 1KB and 1MB
                 case long size when size >= baseSize && size < Math.Pow(baseSize, 2):

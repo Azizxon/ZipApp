@@ -106,14 +106,14 @@ namespace ZipperLib.Domain.ZipperService
         private void StartDecompressorReader(long blocksCount, int threadCount, AutoResetEvent readWaiter)
         {
             var index = 0L;
-            using (var reader = _config.Input.OpenRead())
+            using (var reader = _config.Input.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 reader.Position = sizeof(long);
                 while (index < blocksCount)
                 {
                     if (_inputBlocks.Count >= threadCount)
                     {
-                        SpinWait.SpinUntil(() => _onProcessingBlockCount < threadCount*0.5);
+                        SpinWait.SpinUntil(() => _onProcessingBlockCount < threadCount);
                     }
                     var hrw = new HeaderReaderWriter();
                     var header = hrw.CreateBlockHeader(reader);
@@ -138,7 +138,7 @@ namespace ZipperLib.Domain.ZipperService
                     while (_blocks.ContainsKey(nextIndex))
                     {
                         var block = _blocks[nextIndex];
-                        writer.Write(block.Data, 0, block.Header.DecompressedDataLength);
+                        writer.Write(block.Data, 0, block.Data.Length);
                         _blocks.TryRemove(nextIndex, out _);
                         nextIndex++;
                     }

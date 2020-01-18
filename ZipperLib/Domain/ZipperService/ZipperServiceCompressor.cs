@@ -75,17 +75,16 @@ namespace ZipperLib.Domain.ZipperService
 
         private void StartCompressorReader(AutoResetEvent readWaiter, int threadCount)
         {
-            using (var reader = _config.Input.OpenRead())
+            using (var reader = _config.Input.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 var index = 0L;
                 int readBytes;
                 var buffer = new byte[_config.BufferSize];
-                while ((readBytes = reader.Read(buffer, 0, _config.BufferSize)) != 0)
+                while ((readBytes = reader.Read(buffer, 0, _config.BufferSize)) > 0)
                 {
                     if (_inputBlocks.Count >= threadCount)
                     {
-                        // wait until 50 % threads release 
-                        SpinWait.SpinUntil(() => _onProcessingBlockCount < threadCount*0.5);
+                        SpinWait.SpinUntil(() => _onProcessingBlockCount < threadCount);
                     }
 
                     var bufferTemp = buffer.Clone() as byte[];
@@ -102,8 +101,9 @@ namespace ZipperLib.Domain.ZipperService
             using (var writer = _config.Output.OpenWrite())
             {
                 var nextIndex = 0L;
-                var writtenLength = 0L;
                 var inputFileLength = _config.Input.Length;
+                var writtenLength = 0L;
+
                 var hwr = new HeaderReaderWriter();
                 writer.Position = sizeof(long);
                 while (writtenLength < inputFileLength)
@@ -114,9 +114,8 @@ namespace ZipperLib.Domain.ZipperService
                         var headerBuffer = hwr.CreateBlockHeader(block.Header);
                         writer.Write(headerBuffer, 0, headerBuffer.Length);
                         writer.Write(block.Data, 0, block.Header.CompressedDataLength);
-
+                        writtenLength = writtenLength + block.Header.DecompressedDataLength;
                         _blocks.TryRemove(nextIndex, out _);
-                        writtenLength += block.Header.DecompressedDataLength;
                         nextIndex++;
                     }
                 }

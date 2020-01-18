@@ -11,7 +11,7 @@ namespace Client
             if (args.Length<3)
             {
                 Console.WriteLine("Invalid parameters");
-                return -1;
+                return 1;
             }
 
             var mode = args[0];
@@ -22,7 +22,7 @@ namespace Client
                 var zipApp = new ZipApp(mode, input, output);
                 zipApp.Start();
 
-                return 1;
+                return 0;
             }
             catch (ZipperServiceConfigException e)
             {
@@ -36,7 +36,7 @@ namespace Client
             {
                 Console.WriteLine(e.Message);
             }
-            return -1;
+            return 1;
         }
     }
 }
