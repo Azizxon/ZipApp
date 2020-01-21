@@ -76,8 +76,8 @@ namespace ZipperLibUnitTest
                 (long) Math.Pow(baseSize, 3)*2,
                 (long) Math.Pow(baseSize, 3)*4,
                 (long) Math.Pow(baseSize, 3)*8,
-                (long) Math.Pow(baseSize, 3)*16,
-                (long) Math.Pow(baseSize, 3)*32,
+                //(long) Math.Pow(baseSize, 3)*16,
+                //(long) Math.Pow(baseSize, 3)*32,
             };
             foreach (var fileSize in fileSizes)
             {

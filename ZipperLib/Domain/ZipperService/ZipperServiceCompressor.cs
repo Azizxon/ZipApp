@@ -6,9 +6,14 @@ using ZipperLib.Common;
 
 namespace ZipperLib.Domain.ZipperService
 {
-    public partial class ZipperService
+    public class ZipperServiceCompressor
     {
-        private void CompressFile()
+        public ZipperServiceCompressor(ZipperServiceConfig config)
+        {
+            _config = config;
+        }
+
+        public void CompressFile()
         {
             WriteInputFileInfo();
             using (var pool = new Pool())
@@ -131,5 +136,10 @@ namespace ZipperLib.Domain.ZipperService
                 compressedFileStream.Write(inputFileLengthInfo, 0, inputFileLengthInfo.Length);
             }
         }
+
+        private static int _onProcessingBlockCount;
+        private volatile ZipperServiceConfig _config;
+        private ConcurrentDictionary<long, DataBlock> _blocks;
+        private ConcurrentDictionary<long, InputBlock> _inputBlocks;
     }
 }

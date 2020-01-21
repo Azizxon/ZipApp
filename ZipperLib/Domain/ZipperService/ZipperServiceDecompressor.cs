@@ -8,9 +8,14 @@ using ZipperLib.Exceptions;
 
 namespace ZipperLib.Domain.ZipperService
 {
-    public partial class ZipperService
+    public class ZipperServiceDecompressor
     {
-        private void DecompressFile()
+        public ZipperServiceDecompressor(ZipperServiceConfig config)
+        {
+            _config = config;
+        }
+
+        public void DecompressFile()
         {
             var blocksCount = DecompressionPrepare();
             using (var pool = new Pool())
@@ -74,35 +79,7 @@ namespace ZipperLib.Domain.ZipperService
                               $"from {_config.Input.Length.ToString()} " +
                               $"to {_config.Output.Length.ToString()} bytes.");
         }
-
-        private long DecompressionPrepare()
-        {
-            long blocksCount;
-            try
-            {
-                var sourceFileLength = GetSourceFileInfo();
-                _config.CheckAvailableFreeSpace(_config.Output.FullName, sourceFileLength);
-                _config.CalculateBufferSize(sourceFileLength);
-                long remainder = sourceFileLength % _config.BufferSize;
-
-                blocksCount = sourceFileLength / _config.BufferSize;
-                if (remainder != 0)
-                {
-                    blocksCount = sourceFileLength / _config.BufferSize + 1;
-                }
-            }
-            catch (ZipperServiceConfigException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new ZipperServiceException(e.Message, e);
-            }
-
-            return blocksCount;
-        }
-
+      
         private void StartDecompressorReader(long blocksCount, int threadCount, AutoResetEvent readWaiter)
         {
             var index = 0L;
@@ -170,5 +147,37 @@ namespace ZipperLib.Domain.ZipperService
 
             return sourceFileLength;
         }
+        private long DecompressionPrepare()
+        {
+            long blocksCount;
+            try
+            {
+                var sourceFileLength = GetSourceFileInfo();
+                _config.CheckAvailableFreeSpace(_config.Output.FullName, sourceFileLength);
+                _config.CalculateBufferSize(sourceFileLength);
+                long remainder = sourceFileLength % _config.BufferSize;
+
+                blocksCount = sourceFileLength / _config.BufferSize;
+                if (remainder != 0)
+                {
+                    blocksCount = sourceFileLength / _config.BufferSize + 1;
+                }
+            }
+            catch (ZipperServiceConfigException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new ZipperServiceException(e.Message, e);
+            }
+
+            return blocksCount;
+        }
+
+        private static int _onProcessingBlockCount;
+        private volatile ZipperServiceConfig _config;
+        private ConcurrentDictionary<long, DataBlock> _blocks;
+        private ConcurrentDictionary<long, InputBlock> _inputBlocks;
     }
 }

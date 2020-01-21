@@ -1,9 +1,8 @@
-﻿using System.Collections.Concurrent;
-using ZipperLib.Common;
+﻿using ZipperLib.Common;
 
 namespace ZipperLib.Domain.ZipperService
 {
-    public partial class ZipperService
+    public class ZipperService
     {
         public ZipperService(ZipperServiceConfig config)
         {
@@ -16,17 +15,16 @@ namespace ZipperLib.Domain.ZipperService
             {
                 case ZipMode.Compress:
                     _config.CalculateBufferSize(_config.Input.Length);
-                    CompressFile();
+                    var compressor = new ZipperServiceCompressor(_config);
+                    compressor.CompressFile();
                     break;
                 case ZipMode.Decompress:
-                    DecompressFile();
+                    var decompressor = new ZipperServiceDecompressor(_config);
+                    decompressor.DecompressFile();
                     break;
             }
         }
 
-        private static int _onProcessingBlockCount;
-        private ConcurrentDictionary<long, DataBlock> _blocks;
-        private ConcurrentDictionary<long, InputBlock> _inputBlocks;
         private volatile ZipperServiceConfig _config;
     }
 }
